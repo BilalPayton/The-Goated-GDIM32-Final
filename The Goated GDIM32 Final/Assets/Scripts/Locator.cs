@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+﻿/*using UnityEngine;
 using System.Collections;
 
 public class Locator : MonoBehaviour
@@ -21,4 +21,4 @@ public class Locator : MonoBehaviour
         Player = playerObj.GetComponent<Player>();
     }
 
-}
+}*/
