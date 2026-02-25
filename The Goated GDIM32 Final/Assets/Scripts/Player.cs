@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] Transform cameraTransform;
 
+    [SerializeField] private GameObject _canvas;
+
     private bool _isGrounded;
 
     [SerializeField] float sensitivity = 150f;
@@ -92,7 +94,7 @@ public class Player : MonoBehaviour
 
     private void OnMouseExit()
     {
-        _canvas.SetActive(false);
+        _canvas.SetActive(false); 
     }
 
 
