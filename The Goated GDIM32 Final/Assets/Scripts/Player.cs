@@ -19,6 +19,11 @@ public class Player : MonoBehaviour
     float xRotation;
     float yRotation;
 
+    void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
    
 
 
@@ -45,11 +50,16 @@ public class Player : MonoBehaviour
             _rb.velocity = new Vector3 (_rb.velocity.x, _jumpVelocity, _rb.velocity.z);
         }
 
+        Cursor.lockState = CursorLockMode.Locked;
+        
+
         xRotation -= Input.GetAxis("Mouse Y") * sensitivity;
     yRotation += Input.GetAxis("Mouse X") * sensitivity;
 
     xRotation = Mathf.Clamp(xRotation, -90f, 90f);
     transform.localEulerAngles = new Vector3(xRotation, yRotation, 0);
+
+
 
     }
 
@@ -67,6 +77,17 @@ public class Player : MonoBehaviour
         {
             _isGrounded = false;
         }
+    }
+
+    private void OnMouseOver()
+    {
+        Debug.LogFormat("mous over {0}", gameObject.name);
+        _canvas.SetActive(true);
+    }
+
+    private void OnMouseExit()
+    {
+        _canvas.SetActive(false);
     }
 
 
