@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Player : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class Player : MonoBehaviour
 
     float xRotation;
     float yRotation;
+
+    [SerializeField] private List<Item> _inventory;
 
    
 
