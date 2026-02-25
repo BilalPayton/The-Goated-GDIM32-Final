@@ -70,9 +70,9 @@ public class GameController : MonoBehaviour
         _currentZombieCount++;
     }
 
-    public void ZombieDied()
-    {
-        _currentZombieCount--;
-    }
+   // public void ZombieDied()
+    //{
+     //   _currentZombieCount--;
+   // }
 
 }
