@@ -2,7 +2,7 @@
 using System.Collections;
 using TMPro;
 
-public class UI : MonoBehaviour
+public class InventoryUI : MonoBehaviour
 {
    
 
