@@ -1,9 +1,28 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    // Singleton Code
+    public static Player Instance { get; private set; }
+    public Player player { get; private set; }
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+            return;
+        }
+
+        Instance = this;
+
+        GameObject playerObj = GameObject.FindWithTag("Player");
+        player = playerObj.GetComponent<Player>();
+    }
+    // Singleton Code
+
     [SerializeField] private float _speed = 1.0f;
     
 
@@ -23,7 +42,7 @@ public class Player : MonoBehaviour
     float yRotation;
 
 
-    [SerializeField] private List<Item> _inventory;
+    public List<ItemData> _inventory;
 
     void Start()
     {
@@ -98,7 +117,7 @@ public class Player : MonoBehaviour
     }
 
 
-    
+
 
 
 

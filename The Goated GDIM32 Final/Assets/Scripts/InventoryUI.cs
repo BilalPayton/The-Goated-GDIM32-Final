@@ -4,6 +4,6 @@ using TMPro;
 
 public class InventoryUI : MonoBehaviour
 {
-   
+    public Sprite _itemIcon;
 
 }
