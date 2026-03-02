@@ -834,6 +834,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0bcdd65390cc6c4da04a505f6900f7f, type: 3}
+--- !u!4 &156198013 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6812737671966782772, guid: ef60219f442770b4d8f21896c452ddb6, type: 3}
+  m_PrefabInstance: {fileID: 4280020121704225438}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &162444686
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1684,6 +1689,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3632942138723919092, guid: a82a3cb97e7a7ec41aa4f1934fb3651d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3632942138723919092, guid: a82a3cb97e7a7ec41aa4f1934fb3651d, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3632942138723919092, guid: a82a3cb97e7a7ec41aa4f1934fb3651d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3632942138723919092, guid: a82a3cb97e7a7ec41aa4f1934fb3651d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4373114319546399772, guid: a82a3cb97e7a7ec41aa4f1934fb3651d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1912,6 +1933,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8577906281722721705, guid: a82a3cb97e7a7ec41aa4f1934fb3651d, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 156198013}
     - target: {fileID: 8773434482888790877, guid: a82a3cb97e7a7ec41aa4f1934fb3651d, type: 3}
       propertyPath: m_Color.b
       value: 0.43137255

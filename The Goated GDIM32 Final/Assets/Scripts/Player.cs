@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     public static Player Instance { get; private set; }
     public Player player { get; private set; }
 
+    public List<ItemData> _inventory = new List<ItemData>();
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -42,7 +44,7 @@ public class Player : MonoBehaviour
     float yRotation;
 
 
-    public List<ItemData> _inventory;
+    //public List<ItemData> _inventory;
 
     void Start()
     {
@@ -79,7 +81,7 @@ public class Player : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         
 
-        xRotation -= Input.GetAxis("Mouse Y") * sensitivity;
+    xRotation -= Input.GetAxis("Mouse Y") * sensitivity;
     yRotation += Input.GetAxis("Mouse X") * sensitivity;
 
     xRotation = Mathf.Clamp(xRotation, -90f, 90f);

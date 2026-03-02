@@ -15,3 +15,4 @@ MonoBehaviour:
   _name: Beans
   _description: A can of beans
   _icon: {fileID: 21300000, guid: 733422893bd33114ab133daa7f90430f, type: 3}
+  prefab: {fileID: 261568403265696318, guid: ff55be806d68d9149ad02d2e25d5bb61, type: 3}

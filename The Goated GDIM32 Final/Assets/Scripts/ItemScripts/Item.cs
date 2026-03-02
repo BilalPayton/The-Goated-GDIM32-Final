@@ -21,7 +21,12 @@ public class Item : MonoBehaviour
     {
         Player.Instance.player._inventory.Add(_data);
 
-        FindObjectOfType<InventoryUI>().Refresh();
+        InventoryUI ui = FindObjectOfType<InventoryUI>();
+        if (ui != null && ui.inventory != null)
+        {
+                ui.inventory.Add(_data);
+                ui.Refresh();
+        }
 
         Destroy(gameObject);
     }

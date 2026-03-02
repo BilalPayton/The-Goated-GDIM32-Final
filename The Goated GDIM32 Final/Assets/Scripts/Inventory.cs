@@ -11,7 +11,7 @@ public class Inventory : ScriptableObject
     public void Add(ItemData item)
     {
         items.Add(item);
-        Debug.Log(this.items.Count);
+        //Debug.Log(this.items.Count);
     }
 
     public void Remove(ItemData item)
@@ -19,4 +19,11 @@ public class Inventory : ScriptableObject
         items.Remove(item);
     }
 
+    private void OnEnable()
+    {
+        if (items == null)
+        {
+            items = new List<ItemData>();
+        }
+    }
 }

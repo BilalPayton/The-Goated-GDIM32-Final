@@ -14,6 +14,10 @@ public class InventorySlot : MonoBehaviour
 
         ItemData item = inventory.items[index];
 
-        GameController.instance.GiveItem(item);
+        inventory.Remove(item);
+
+        FindObjectOfType<InventoryUI>().Refresh();
+
+        //GameController.instance.GiveItem(item);
     }
 }
