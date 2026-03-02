@@ -21,6 +21,8 @@ public class Item : MonoBehaviour
     {
         Player.Instance.player._inventory.Add(_data);
 
+        FindObjectOfType<InventoryUI>().Refresh();
+
         Destroy(gameObject);
     }
 }

@@ -70,9 +70,18 @@ public class GameController : MonoBehaviour
         _currentZombieCount++;
     }
 
-   // public void ZombieDied()
+    public void GiveItem(ItemData item)
+    {
+        Debug.Log("Giving item: " + item._name);
+
+        Player.Instance.player._inventory.Remove(item);
+
+        FindObjectOfType<InventoryUI>().Refresh();
+    }
+
+    // public void ZombieDied()
     //{
-     //   _currentZombieCount--;
-   // }
+    //   _currentZombieCount--;
+    // }
 
 }
