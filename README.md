@@ -4,6 +4,7 @@
 Put your group Devlog here.
 
 
+
 ### Bella Sloan
 Put your individual check-in Devlog here.
 ### Bilal Payton
