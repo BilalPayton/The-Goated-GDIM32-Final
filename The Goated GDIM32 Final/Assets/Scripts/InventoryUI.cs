@@ -9,6 +9,7 @@ public class InventoryUI : MonoBehaviour
     public Transform slotContainer;
     public Transform player;
     public int selectedIndex = 0;
+    public ItemUI itemUI;
 
     void Update()
     {
@@ -20,21 +21,45 @@ public class InventoryUI : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha6)) SelectSlot(5);
         if (Input.GetKeyDown(KeyCode.Alpha7)) SelectSlot(6);
 
-        
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            UseItem();
+        }
+
         if (Input.GetKeyDown(KeyCode.Q))
         {
-                DropItem();
+            DropItem();
         }
-        
-    }
 
+    }
+    void Start()
+    {
+        inventory.ResetInventory();
+        Refresh();
+    }
     void SelectSlot(int index)
     {
         selectedIndex = index;
 
         Debug.Log("Selected slot " + index);
-    }
 
+        if (index < inventory.items.Count)
+        {
+            itemUI.ShowItem(inventory.items[index]._name);
+        }
+    }
+    void UseItem()
+    {
+        ItemData item = inventory.items[selectedIndex];
+        inventory.Remove(item);
+        Refresh();
+
+        if (itemUI != null)
+        {
+            itemUI.ShowMessage("You used " + item._name);
+        }
+    }
     void DropItem()
     {
         if (selectedIndex >= inventory.items.Count) return;
@@ -54,6 +79,11 @@ public class InventoryUI : MonoBehaviour
         inventory.Remove(item);
 
         Refresh();
+
+        if (itemUI != null)
+        {
+            itemUI.ShowMessage(item._name + " dropped.");
+        }
     }
 
     public void Refresh()

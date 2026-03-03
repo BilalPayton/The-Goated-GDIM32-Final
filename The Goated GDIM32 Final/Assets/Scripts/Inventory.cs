@@ -26,4 +26,8 @@ public class Inventory : ScriptableObject
             items = new List<ItemData>();
         }
     }
+    public void ResetInventory()
+    {
+        items.Clear();
+    }
 }

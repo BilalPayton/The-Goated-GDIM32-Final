@@ -19,13 +19,19 @@ public class Item : MonoBehaviour
 
     protected virtual void OnMouseDown()
     {
-        Player.Instance.player._inventory.Add(_data);
-
+        //Player.Instance.player._inventory.Add(_data);
         InventoryUI ui = FindObjectOfType<InventoryUI>();
+
         if (ui != null && ui.inventory != null)
         {
                 ui.inventory.Add(_data);
                 ui.Refresh();
+
+            if (ui.itemUI != null)
+            {
+                ui.itemUI.ShowCollected(_data._name);
+                Debug.Log("ShowCollected called");
+            }
         }
 
         Destroy(gameObject);
