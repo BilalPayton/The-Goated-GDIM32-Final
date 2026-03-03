@@ -15,8 +15,7 @@ are no issues after resolving them and our project doesn't blow up.
 
 
 
-### Bella Sloan
-Put your individual check-in Devlog here.
+
 ### Bilal Payton
 I have created two different animations for the zombie npcs, that being their idle and running
 animations. Currently these animations are attached to prefabs in the scene hierarchy called 
