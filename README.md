@@ -1,10 +1,14 @@
 # GDIM32-Final
 ## Check-In
-### Team Member Name 1
+### Group Devlog
+Put your group Devlog here.
+
+
+### Bella Sloan
 Put your individual check-in Devlog here.
-### Team Member Name 2
+### Bilal Payton
 Put your individual check-in Devlog here.
-### Team Member Name 3
+### Laura Liu
 Put your individual check-in Devlog here.
 
 
@@ -13,11 +17,11 @@ Put your individual check-in Devlog here.
 Put your group Devlog here.
 
 
-### Team Member Name 1
+### Bella Sloan
 Put your individual final Devlog here.
-### Team Member Name 2
+### Bilal Payton
 Put your individual final Devlog here.
-### Team Member Name 3
+### Laura Liu
 Put your individual final Devlog here.
 
 ## Open-Source Assets
