@@ -78,7 +78,7 @@ public class Player : MonoBehaviour
             _rb.velocity = new Vector3 (_rb.velocity.x, _jumpVelocity, _rb.velocity.z);
         }
 
-        Cursor.lockState = CursorLockMode.Locked;
+        
         
 
     xRotation -= Input.GetAxis("Mouse Y") * sensitivity;
