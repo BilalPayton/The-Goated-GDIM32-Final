@@ -33,9 +33,12 @@ public class InventoryUI : MonoBehaviour
         }
 
     }
-    void Start()
+    void Awake()
     {
         inventory.ResetInventory();
+    }
+    void Start()
+    {
         Refresh();
     }
     void SelectSlot(int index)
@@ -52,13 +55,18 @@ public class InventoryUI : MonoBehaviour
     void UseItem()
     {
         ItemData item = inventory.items[selectedIndex];
+
+        Item allItem = item.prefab.GetComponent<Item>();
+
+        if (allItem != null)
+        {
+            allItem.Use(itemUI);
+        }
+
         inventory.Remove(item);
         Refresh();
 
-        if (itemUI != null)
-        {
-            itemUI.ShowMessage("You used " + item._name);
-        }
+        
     }
     void DropItem()
     {
@@ -68,12 +76,20 @@ public class InventoryUI : MonoBehaviour
 
         GameObject obj = Instantiate(item.prefab);
 
-        obj.transform.position = player.transform.position + player.transform.forward * 0.5f;
+        Vector3 forward = player.transform.forward;
+        forward.y = 0;
+
+        Vector3 dropPosition = player.transform.position + forward * 0.7f;
 
         RaycastHit hit;
-        if (Physics.Raycast(obj.transform.position + Vector3.up * 1f, Vector3.down, out hit, 5f))
+
+        if (Physics.Raycast(dropPosition + Vector3.up * 2f, Vector3.down, out hit, 5f))
         {
             obj.transform.position = hit.point;
+        }
+        else
+        {
+            obj.transform.position = dropPosition;
         }
 
         inventory.Remove(item);
@@ -89,7 +105,6 @@ public class InventoryUI : MonoBehaviour
     public void Refresh()
     {
         Debug.Log("Refresh called");
-        Debug.Log(slotContainer.childCount);
 
         for (int i = 0; i < slotContainer.childCount; i++)
         {
@@ -106,7 +121,14 @@ public class InventoryUI : MonoBehaviour
             {
                 image.sprite = null;
             }
+            
         }
+
+        if (inventory.items.Count > 0 && itemUI != null)
+            {
+                ItemData lastItem = inventory.items[inventory.items.Count - 1];
+                itemUI.ShowCollected(lastItem._name);
+            }
     }
 
     

@@ -30,10 +30,18 @@ public class Item : MonoBehaviour
             if (ui.itemUI != null)
             {
                 ui.itemUI.ShowCollected(_data._name);
-                Debug.Log("ShowCollected called");
             }
         }
 
         Destroy(gameObject);
     }
+    public virtual void Use(ItemUI ui)
+    {
+        if (ui != null)
+        {
+            ui.ShowMessage("You used " + _data._name);
+        }
+    }
 }
+
+
