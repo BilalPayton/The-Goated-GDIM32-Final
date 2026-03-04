@@ -122,11 +122,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3af8cc711e8e754c82b7b5328bb1888, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 1
+  _inventory: []
+  _speed: 2
   _jumpVelocity: 3
   _rb: {fileID: 3693674518524975227}
   cameraTransform: {fileID: 8706797136133921468}
-  sensitivity: 40
+  _canvas: {fileID: 0}
+  sensitivity: 20
 --- !u!54 &3693674518524975227
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -152,7 +154,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!1 &7976384460091996900
 GameObject:
