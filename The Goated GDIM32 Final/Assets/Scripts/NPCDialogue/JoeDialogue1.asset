@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6a21a78cca5b6d4aacd79e7f4e6d1aa, type: 3}
+  m_Name: JoeDialogue1
+  m_EditorClassIdentifier: 
+  _lines:
+  - What's up? I'm Joe
+  - Would you like some beans?
+  _playerReplyOptions:
+  - Yes!
+  - Hell nah!
+  - Maybe...
+  _npcReplies:
+  - {fileID: 11400000, guid: a1208066f5f79644f87d84b8de495a7a, type: 2}
+  - {fileID: 11400000, guid: d58f5b490a0cec446b568b6a6106ed44, type: 2}
+  - {fileID: 11400000, guid: d87f924927bc220459665dd97aec1379, type: 2}
