@@ -5,6 +5,8 @@ public class ItemUI : MonoBehaviour
 {
     public GameObject panel;
     public TMP_Text text;
+    //public float timer = 0f;
+    //public float displayTime = 5f;
 
     void Awake()
     {
@@ -21,12 +23,32 @@ public class ItemUI : MonoBehaviour
     {
         panel.SetActive(true);
         text.text = itemName + "\nPress E to Eat\nPress Q to Drop";
+
+        timer = displayTime;
     }
     public void ShowMessage(string message)
     {
         panel.SetActive(true);
         text.text = message;
+
+        CancelInvoke();
+        Invoke("HideUI", 3f);
     }
+
+    /*void Update()
+    {
+        if (panel.activeSelf)
+        {
+            timer -= Time.deltaTime;
+
+            if (timer < 0f)
+            {
+                panel.SetActive(false);
+            }
+        }
+    }*/
+
+
     /*void Update()
     {
         if (!panel.activeSelf) return;
@@ -43,9 +65,8 @@ public class ItemUI : MonoBehaviour
             Invoke("Hide", 2f);
         }
     }*/
-    void Hide()
+    void HideUI()
     {
         panel.SetActive(false);
-        text.text = "";
     }
 }
