@@ -81,11 +81,14 @@ public class Player : MonoBehaviour
         
         
 
-    xRotation -= Input.GetAxis("Mouse Y") * sensitivity;
-    yRotation += Input.GetAxis("Mouse X") * sensitivity;
+    float mouseX = Input.GetAxis("Mouse X") * sensitivity;
+    float mouseY = Input.GetAxis("Mouse Y") * sensitivity;
 
-    xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-    transform.localEulerAngles = new Vector3(xRotation, yRotation, 0);
+   transform.Rotate(Vector3.up * mouseX);
+
+   xRotation -= mouseY;
+   xRotation = Mathf.Clamp(xRotation, -80f, 80f);
+   cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
 
 
