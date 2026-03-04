@@ -24,7 +24,7 @@ public class ItemUI : MonoBehaviour
         panel.SetActive(true);
         text.text = itemName + "\nPress E to Eat\nPress Q to Drop";
 
-        timer = displayTime;
+        //timer = displayTime;
     }
     public void ShowMessage(string message)
     {
