@@ -1868,7 +1868,7 @@ GameObject:
   - component: {fileID: 277401857439156852}
   - component: {fileID: 3411074743638364685}
   m_Layer: 0
-  m_Name: Zombie Male (Run)
+  m_Name: Zombie Male
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
