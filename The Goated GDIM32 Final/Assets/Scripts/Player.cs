@@ -10,6 +10,9 @@ public class Player : MonoBehaviour
 
     public List<ItemData> _inventory = new List<ItemData>();
 
+   
+
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -25,8 +28,14 @@ public class Player : MonoBehaviour
     }
     // Singleton Code
 
-    [SerializeField] private float _speed = 1.0f;
-    
+    [SerializeField] private float _walkSpeed = 1.0f;
+
+
+    [SerializeField] private float _sprintSpeed = 6.0f;
+
+    private float _speed;
+
+     
 
     [SerializeField] public float _jumpVelocity = 3f;
 
@@ -40,6 +49,10 @@ public class Player : MonoBehaviour
 
     [SerializeField] float sensitivity = 150f;
 
+    
+
+
+
     float xRotation;
     float yRotation;
 
@@ -49,6 +62,8 @@ public class Player : MonoBehaviour
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+
+        _speed = _walkSpeed;
     }
 
 
@@ -57,6 +72,14 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+          if(Input.GetKey(KeyCode.LeftShift))
+        {
+            _speed = _sprintSpeed;
+        }
+        else
+        {
+            _speed = _walkSpeed;
+        }
         if(Input.GetKey(KeyCode.W))
         {
             transform.Translate(Vector3.forward * _speed * Time.deltaTime);
@@ -77,6 +100,9 @@ public class Player : MonoBehaviour
         {
             _rb.velocity = new Vector3 (_rb.velocity.x, _jumpVelocity, _rb.velocity.z);
         }
+      
+        
+        
 
         
         
@@ -86,7 +112,7 @@ public class Player : MonoBehaviour
 
    transform.Rotate(Vector3.up * mouseX);
 
-   xRotation -= mouseY;
+   xRotation += mouseY;
    xRotation = Mathf.Clamp(xRotation, -80f, 80f);
    cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
