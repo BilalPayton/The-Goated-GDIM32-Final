@@ -17,5 +17,8 @@ public class Beans : Item
         {
             ui.ShowMessage("You have been healed for 10 health.");
         }
+
+        PlayerHealth playerHealth = FindObjectOfType<PlayerHealth>();
+        playerHealth.AddHealth(10);
     }
 }
