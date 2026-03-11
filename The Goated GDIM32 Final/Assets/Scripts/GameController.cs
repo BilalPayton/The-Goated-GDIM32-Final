@@ -41,7 +41,7 @@ public class GameController : MonoBehaviour
     private void HandleSpawning()
     {
  
-        if (CurrentState == GameState.Quest2)
+        if (CurrentState == GameState.Escaping)
         {
             _spawnTimer += Time.deltaTime;
 
