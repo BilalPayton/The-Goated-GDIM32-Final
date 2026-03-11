@@ -5,7 +5,6 @@ using System.Collections;
 public enum GameState
 {
     Quest1,
-    Quest2,
     Escaping
 }
 
