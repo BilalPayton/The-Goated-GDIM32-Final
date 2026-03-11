@@ -17,6 +17,7 @@ public class NPCMultipleBranches : MonoBehaviour
     [SerializeField] private GameObject _playerReply1;
     [SerializeField] private GameObject _playerReply2;
     [SerializeField] private GameObject _playerReply3;
+    [SerializeField] private NPCDialogueUI _playerReplyUI;
 
 
     private int _currentLine = 0;
@@ -111,7 +112,11 @@ public class NPCMultipleBranches : MonoBehaviour
 
     private void ShowPlayerReplies()
     {
-        for (int i = 0; i < _currentNode._playerReplyOptions.Length; i++)
+        Cursor.lockState = CursorLockMode.None;
+
+        int numPlayerOptions = _currentNode._playerReplyOptions.Length;
+
+        for (int i = 0; i < numPlayerOptions; i++)
         {
             if (i == 0)
             {
@@ -129,15 +134,43 @@ public class NPCMultipleBranches : MonoBehaviour
             }
         }
 
-        _playerReply1.gameObject.SetActive(true);
-        _playerReply2.gameObject.SetActive(true);
-        _playerReply3.gameObject.SetActive(true);
+        switch (numPlayerOptions)
+        {
+            case 1:
+            _playerReply1.gameObject.SetActive(true);
+            _playerReply2.gameObject.SetActive(false);
+            _playerReply3.gameObject.SetActive(false);
+            _playerReplyUI.gameObject.SetActive(true);
+                break;
+
+            case 2:
+                _playerReply1.gameObject.SetActive(true);
+                _playerReply2.gameObject.SetActive(true);
+                _playerReply3.gameObject.SetActive(false);
+                _playerReplyUI.gameObject.SetActive(true);
+                break;
+
+            case 3:
+                _playerReply1.gameObject.SetActive(true);
+                _playerReply2.gameObject.SetActive(true);
+                _playerReply3.gameObject.SetActive(true);
+                _playerReplyUI.gameObject.SetActive(true);
+                break;
+
+
+        }
+
     }
 
     private void HidePlayerReplies()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+
+
         _playerReply1.gameObject.SetActive(false);
         _playerReply2.gameObject.SetActive(false);
         _playerReply3.gameObject.SetActive(false);
+        _playerReplyUI.gameObject.SetActive(false);
+
     }
 }

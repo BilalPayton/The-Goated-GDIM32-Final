@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6a21a78cca5b6d4aacd79e7f4e6d1aa, type: 3}
-  m_Name: JoeHellNahReply
+  m_Name: JoeQuestStartYeah
   m_EditorClassIdentifier: 
   _lines:
-  - Your loss bozo
+  - Great! Thanks a lot!
   _playerReplyOptions:
-  - That wasn't very nice :(
+  - No problem OG
   _npcReplies: []

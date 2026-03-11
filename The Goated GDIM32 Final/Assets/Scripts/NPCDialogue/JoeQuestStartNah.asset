@@ -10,11 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6a21a78cca5b6d4aacd79e7f4e6d1aa, type: 3}
-  m_Name: JoeMaybeReply
+  m_Name: JoeQuestStartNah
   m_EditorClassIdentifier: 
   _lines:
-  - So... is that a yes?
-  _playerReplyOptions:
-  - Maybe
-  _npcReplies:
-  - {fileID: 11400000, guid: 32afac7f6d6995d45868577eb209f8db, type: 2}
+  - Puhleaase Player I need this!!!
+  _playerReplyOptions: []
+  _npcReplies: []

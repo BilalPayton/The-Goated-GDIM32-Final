@@ -10,9 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c6a21a78cca5b6d4aacd79e7f4e6d1aa, type: 3}
-  m_Name: JoeMaybeReply2
+  m_Name: JoeQuestStart
   m_EditorClassIdentifier: 
   _lines:
-  - You're a strange fella
-  _playerReplyOptions: []
-  _npcReplies: []
+  - Hey what's up? I'm Joe
+  - I seem to have lost my beans
+  - Will you find them for me?
+  _playerReplyOptions:
+  - Yeah!
+  - Nah
+  _npcReplies:
+  - {fileID: 11400000, guid: 8344ec91198db9c4f9b33e8c3d0dadcb, type: 2}
+  - {fileID: 11400000, guid: dd37f4b6ea338e64899ebdbecb368700, type: 2}
