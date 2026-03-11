@@ -1,29 +1,220 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
+using UnityEngine.AI;
 
 public class ZombieNPC : MonoBehaviour
 {
-    public Transform player;
-
-    private UnityEngine.AI.NavMeshAgent agent;
-
-    public float chaseDistance = 10f;
-    void Start()
+    private enum ZombieState
     {
-        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        Wandering,
+        Chasing
     }
 
-   
+    [SerializeField] private LayerMask _lineOfSightLayers;
+    [SerializeField] private float _wanderTimeMax = 5.0f;
+    [SerializeField] private float _obstacleCheckDistance = 1.0f;
+    [SerializeField] private float _obstactleCheckRadius = 1.0f;
+    [SerializeField] private float _stopDistance = 0.5f;
+    [SerializeField] private float _walkSpeed = 2f;
+    [SerializeField] private float _rotateSpeed = 2f;
+    [SerializeField] private float _lineOfSightMaxDistance = 10f;
+    [SerializeField] private Vector3 _raycastStartOffSet = new Vector3(0f, 1f, 0f);
+    [SerializeField] private Rigidbody _rigidBody;
+    [SerializeField] private MeshRenderer _renderer;
+    [SerializeField] private float _interactDistance = 5.0f;
+    [SerializeField] private float _runDistance = 5.0f;
+    [SerializeField] private NavMeshAgent _navAgent;
+    [SerializeField] private Animator _animator;
+
+    private Transform _playerTransform;
+    private string _playerTag = "Player";
+    private ZombieState _state;
+    private float _wanderTime;
+    private Vector3 _wanderDirection;
+
+    // Added missing fields
+    private Vector3 _meToPlayer;
+    private bool _hasLineOfSightToPlayer;
+    private Vector3 _raycastHitLocation;
+    private Vector3 _spherecastHitLocation;
+
+    void Start()
+    {
+        if (_navAgent == null)
+        {
+            _navAgent = GetComponent<NavMeshAgent>();
+        }
+
+        GameObject playerObj = GameObject.FindWithTag("Player");
+        if (playerObj != null)
+        {
+            _playerTransform = playerObj.transform;
+        }
+        else
+        {
+            Debug.LogError("ZombieNPC: No GameObject with tag 'Player' found.");
+        }
+
+        _wanderTime = _wanderTimeMax;
+        GetNewWanderDirection();
+    }
+
     void Update()
     {
-        agent.SetDestination(player.position);
-        
-        float distance = Vector3.Distance(transform.position, player.position);
-        if (distance < chaseDistance)
+        if (_playerTransform == null)
         {
-            agent.SetDestination(player.position);
+            return;
+        }
+
+        UpdateState();
+        RunState();
+    }
+
+    private void UpdateState()
+    {
+        if (HasLineOfSightToPlayer())
+        {
+            _state = ZombieState.Chasing;
+        }
+        else
+        {
+            _state = ZombieState.Wandering;
         }
     }
 
+    private void RunState()
+    {
+        switch (_state)
+        {
+            case ZombieState.Wandering:
+                RunWanderState();
+                break;
+
+            case ZombieState.Chasing:
+                RunChaseState();
+                break;
+
+            default:
+                Debug.LogError("Unhandled state " + _state);
+                break;
+        }
+    }
+
+    private void RunWanderState()
+    {
+        _wanderTime -= Time.deltaTime;
+
+        if (_wanderTime <= 0.0f)
+        {
+            _wanderTime = _wanderTimeMax;
+            GetNewWanderDirection();
+        }
+
+        int attempts = 0;
+        while (HasClosedObstacles() && attempts < 3)
+        {
+            GetNewWanderDirection();
+            attempts++;
+        }
+
+        RotateTowards(_wanderDirection);
+        transform.Translate(_wanderDirection * _walkSpeed * Time.deltaTime, Space.World);
+    }
+
+    private void GetNewWanderDirection()
+    {
+        Vector3 randomDirection = new Vector3(
+            Random.Range(-1f, 1f),
+            0f,
+            Random.Range(-1f, 1f)
+        );
+
+        _wanderDirection = randomDirection.normalized;
+    }
+
+    private bool HasClosedObstacles()
+    {
+        RaycastHit hitInfo;
+        Vector3 raycastStart = transform.position + _raycastStartOffSet;
+
+        bool hasObstacles = Physics.SphereCast(
+            raycastStart,
+            _obstactleCheckRadius,
+            _wanderDirection,
+            out hitInfo,
+            _obstacleCheckDistance
+        );
+
+        if (hasObstacles)
+        {
+            _spherecastHitLocation = hitInfo.point;
+        }
+
+        return hasObstacles;
+    }
+
+    private void RunChaseState()
+    {
+        Vector3 playerPosition = _playerTransform.position;
+        playerPosition = new Vector3(playerPosition.x, 0, playerPosition.z);
+
+        Vector3 me = new Vector3(transform.position.x, 0, transform.position.z);
+        _meToPlayer = (playerPosition - me).normalized;
+
+        RotateTowards(_meToPlayer);
+        WalkTowards(playerPosition);
+    }
+
+    private void RotateTowards(Vector3 direction)
+    {
+        if (direction == Vector3.zero) return;
+
+        Vector3 currentForward = new Vector3(transform.forward.x, 0, transform.forward.z);
+        Vector3 newForward = Vector3.RotateTowards(currentForward, direction, _rotateSpeed * Time.deltaTime, 0f);
+        transform.forward = newForward;
+    }
+
+    private void WalkTowards(Vector3 point)
+    {
+        Vector3 me = new Vector3(transform.position.x, 0, transform.position.z);
+
+        if (Vector3.Distance(me, point) <= _stopDistance)
+        {
+            return;
+        }
+
+        Vector3 meToTarget = point - me;
+        meToTarget = meToTarget.normalized;
+
+        transform.Translate(meToTarget * _walkSpeed * Time.deltaTime, Space.World);
+    }
+
+    private bool HasLineOfSightToPlayer()
+    {
+        _hasLineOfSightToPlayer = false;
+
+        if (_playerTransform == null)
+        {
+            return false;
+        }
+
+        RaycastHit hitInfo;
+
+        Vector3 raycastStart = transform.position + _raycastStartOffSet;
+        Vector3 raycastDirection = (_playerTransform.position - raycastStart).normalized;
+
+        if (Physics.Raycast(raycastStart, raycastDirection, out hitInfo, _lineOfSightMaxDistance, _lineOfSightLayers))
+        {
+            _raycastHitLocation = hitInfo.point;
+
+            if (hitInfo.collider.CompareTag(_playerTag))
+            {
+                _hasLineOfSightToPlayer = true;
+            }
+        }
+
+        return _hasLineOfSightToPlayer;
+    }
 }
