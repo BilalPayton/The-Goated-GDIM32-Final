@@ -5,7 +5,6 @@ using System.Collections;
 public enum GameState
 {
     Quest1,
-    Quest2,
     Escaping
 }
 
@@ -42,7 +41,7 @@ public class GameController : MonoBehaviour
     private void HandleSpawning()
     {
  
-        if (CurrentState == GameState.Quest2)
+        if (CurrentState == GameState.Escaping)
         {
             _spawnTimer += Time.deltaTime;
 

@@ -16,7 +16,7 @@ public class ItemUI : MonoBehaviour
     public void ShowCollected(string itemName)
     {
         panel.SetActive(true);
-        text.text = itemName + " collected!\nPress 1-7 to select a slot.";
+        text.text = itemName + " collected!\nPress 1-7 to select the slot.";
     }
 
     public void ShowItem(string itemName)
