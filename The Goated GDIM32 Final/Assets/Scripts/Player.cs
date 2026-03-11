@@ -28,10 +28,10 @@ public class Player : MonoBehaviour
     }
     // Singleton Code
 
-    [SerializeField] private float _walkSpeed = 1.0f;
+    [SerializeField] private float _walkSpeed = 2.0f;
 
 
-    [SerializeField] private float _sprintSpeed = 6.0f;
+    [SerializeField] private float _sprintSpeed = 4.0f;
 
     private float _speed;
 
