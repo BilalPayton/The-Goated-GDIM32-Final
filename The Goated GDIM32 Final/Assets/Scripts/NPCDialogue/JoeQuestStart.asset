@@ -18,7 +18,7 @@ MonoBehaviour:
   - Will you find them for me?
   _playerReplyOptions:
   - Yeah!
-  - Nah
+  - Fuh nah
   _npcReplies:
   - {fileID: 11400000, guid: 8344ec91198db9c4f9b33e8c3d0dadcb, type: 2}
   - {fileID: 11400000, guid: dd37f4b6ea338e64899ebdbecb368700, type: 2}

@@ -1267,7 +1267,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 876731299}
+      - m_Target: {fileID: 876731303}
         m_TargetAssemblyTypeName: NPCMultipleBranches, Assembly-CSharp
         m_MethodName: SelectedOption
         m_Mode: 3
@@ -7268,26 +7268,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3678982315183220008, guid: 1dbcd76f8a3ef4fefa5170da62c9b429, type: 3}
   m_PrefabInstance: {fileID: 2122080364}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &876731299
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 876731298}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22828ae09ee28a847826b99ff6813ebc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _interactionDistance: 1
-  _startNode: {fileID: 11400000, guid: 062fead35c1efb14db0d7563c7d0b973, type: 2}
-  _interactText: {fileID: 769604322}
-  _npcDialogue: {fileID: 1181189026}
-  _playerReply1: {fileID: 1336276306}
-  _playerReply2: {fileID: 148673000}
-  _playerReply3: {fileID: 1841204338}
-  _playerReplyUI: {fileID: 1298906675}
 --- !u!136 &876731301
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -7311,6 +7291,27 @@ CapsuleCollider:
   m_Height: 1.6205277
   m_Direction: 1
   m_Center: {x: -0.06000006, y: 0.52170134, z: 0.2669256}
+--- !u!114 &876731303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 876731298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e514376e3c9d6f8489a78d20079d6c54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _interactionDistance: 1
+  _startNode: {fileID: 11400000, guid: 062fead35c1efb14db0d7563c7d0b973, type: 2}
+  _questCompleteNode: {fileID: 0}
+  _interactText: {fileID: 769604322}
+  _npcDialogue: {fileID: 1181189026}
+  _playerReply1: {fileID: 1336276306}
+  _playerReply2: {fileID: 148673000}
+  _playerReply3: {fileID: 1841204338}
+  _playerReplyUI: {fileID: 1298906675}
 --- !u!4 &881627036 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4ebf396b272dc432598254df129239d4, type: 3}
@@ -8116,7 +8117,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 876731299}
+      - m_Target: {fileID: 876731303}
         m_TargetAssemblyTypeName: NPCMultipleBranches, Assembly-CSharp
         m_MethodName: SelectedOption
         m_Mode: 3
@@ -12665,11 +12666,6 @@ CapsuleCollider:
   m_Height: 4.572479
   m_Direction: 1
   m_Center: {x: 0.10674092, y: 1.7862406, z: 0.20237662}
---- !u!4 &1417140514 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 277401857439156852, guid: b0bcdd65390cc6c4da04a505f6900f7f, type: 3}
-  m_PrefabInstance: {fileID: 1313467346}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1417140515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12682,8 +12678,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da1881f1238004e87827aded9d220efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1417140514}
-  chaseDistance: 10
+  _lineOfSightLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  _wanderTimeMax: 5
+  _obstacleCheckDistance: 1
+  _obstactleCheckRadius: 1
+  _stopDistance: 0.5
+  _walkSpeed: 2
+  _rotateSpeed: 2
+  _lineOfSightMaxDistance: 10
+  _raycastStartOffSet: {x: 0, y: 1, z: 0}
+  _rigidBody: {fileID: 0}
+  _renderer: {fileID: 0}
+  _interactDistance: 5
+  _runDistance: 5
+  _navAgent: {fileID: 0}
+  _animator: {fileID: 0}
 --- !u!195 &1417140516
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -17963,7 +17974,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 876731299}
+      - m_Target: {fileID: 876731303}
         m_TargetAssemblyTypeName: NPCMultipleBranches, Assembly-CSharp
         m_MethodName: SelectedOption
         m_Mode: 3
@@ -19101,10 +19112,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3678982315183220008, guid: 1dbcd76f8a3ef4fefa5170da62c9b429, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 876731299}
+      addedObject: {fileID: 876731301}
     - targetCorrespondingSourceObject: {fileID: 3678982315183220008, guid: 1dbcd76f8a3ef4fefa5170da62c9b429, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 876731301}
+      addedObject: {fileID: 876731303}
   m_SourcePrefab: {fileID: 100100000, guid: 1dbcd76f8a3ef4fefa5170da62c9b429, type: 3}
 --- !u!4 &2123126321 stripped
 Transform:

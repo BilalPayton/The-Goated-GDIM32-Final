@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class NPCMultipleBranches : MonoBehaviour
 {
-    [SerializeField] private float _interactionDistance = 2.0f;
+    [SerializeField] private float _interactionDistance = 1.0f;
     [SerializeField] private NPCDialogue _startNode;
+    [SerializeField] private NPCDialogue _questCompleteNode;
 
     private NPCDialogue _currentNode;
 
@@ -55,7 +56,7 @@ public class NPCMultipleBranches : MonoBehaviour
     private void AdvanceDialogue()
     {
         _runningDialogue = true;
-        _interactText.gameObject.transform.position = new Vector3(-1, -1, -1);
+        _interactText.gameObject.SetActive(false);
 
         if (_currentLine < _currentNode._lines.Length)
         {
@@ -134,30 +135,28 @@ public class NPCMultipleBranches : MonoBehaviour
             }
         }
 
+        _playerReply1.gameObject.SetActive(true);
+        _playerReplyUI.gameObject.SetActive(true);
+
         switch (numPlayerOptions)
         {
             case 1:
-            _playerReply1.gameObject.SetActive(true);
             _playerReply2.gameObject.SetActive(false);
             _playerReply3.gameObject.SetActive(false);
-            _playerReplyUI.gameObject.SetActive(true);
                 break;
 
             case 2:
-                _playerReply1.gameObject.SetActive(true);
                 _playerReply2.gameObject.SetActive(true);
                 _playerReply3.gameObject.SetActive(false);
-                _playerReplyUI.gameObject.SetActive(true);
                 break;
 
             case 3:
-                _playerReply1.gameObject.SetActive(true);
                 _playerReply2.gameObject.SetActive(true);
                 _playerReply3.gameObject.SetActive(true);
-                _playerReplyUI.gameObject.SetActive(true);
                 break;
 
 
+            
         }
 
     }
@@ -171,6 +170,11 @@ public class NPCMultipleBranches : MonoBehaviour
         _playerReply2.gameObject.SetActive(false);
         _playerReply3.gameObject.SetActive(false);
         _playerReplyUI.gameObject.SetActive(false);
+
+    }
+
+    protected virtual void CheckForQuestItem()
+    {
 
     }
 }
