@@ -19,7 +19,7 @@ public class Item : MonoBehaviour
 
     protected virtual void OnMouseDown()
     {
-        //Player.Instance.player._inventory.Add(_data); Change it to an independent Inventory list
+        Player.Instance.player._inventory.Add(_data);
 
         InventoryUI ui = FindObjectOfType<InventoryUI>();
 

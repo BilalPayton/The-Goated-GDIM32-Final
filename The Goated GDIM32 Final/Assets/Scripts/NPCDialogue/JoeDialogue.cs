@@ -6,6 +6,13 @@ public class JoeDialogue : NPCMultipleBranches
 {
     protected override void CheckForQuestItem()
     {
-        // in progress
+        foreach (ItemData x in Player.Instance.player._inventory)
+        {
+            if (x._name.Equals("Beans"))
+            {
+                _currentNode = _questCompleteNode;
+            }
+        }
+
     }
 }

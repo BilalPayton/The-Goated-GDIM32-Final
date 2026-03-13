@@ -7,9 +7,9 @@ public class NPCMultipleBranches : MonoBehaviour
 {
     [SerializeField] private float _interactionDistance = 1.0f;
     [SerializeField] private NPCDialogue _startNode;
-    [SerializeField] private NPCDialogue _questCompleteNode;
+    [SerializeField] protected NPCDialogue _questCompleteNode;
 
-    private NPCDialogue _currentNode;
+    protected NPCDialogue _currentNode;
 
     [SerializeField] private GameObject _interactText;
     [SerializeField] private GameObject _npcDialogue;
@@ -40,6 +40,7 @@ public class NPCMultipleBranches : MonoBehaviour
 
             if(!_waitingForPlayerResponse && Input.GetKeyDown(KeyCode.Mouse0))
             {
+                CheckForQuestItem();
                 AdvanceDialogue();
             }
             else if(!_runningDialogue)
@@ -175,6 +176,7 @@ public class NPCMultipleBranches : MonoBehaviour
 
     protected virtual void CheckForQuestItem()
     {
-
+        
     }
+
 }

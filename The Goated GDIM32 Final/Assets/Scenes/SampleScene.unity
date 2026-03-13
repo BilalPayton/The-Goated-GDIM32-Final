@@ -7305,7 +7305,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactionDistance: 1
   _startNode: {fileID: 11400000, guid: 062fead35c1efb14db0d7563c7d0b973, type: 2}
-  _questCompleteNode: {fileID: 0}
+  _questCompleteNode: {fileID: 11400000, guid: 0e4eb015c7a6600459dff7370716c3a6, type: 2}
   _interactText: {fileID: 769604322}
   _npcDialogue: {fileID: 1181189026}
   _playerReply1: {fileID: 1336276306}
