@@ -6,9 +6,9 @@ public class JoeDialogue : NPCMultipleBranches
 {
     protected override void CheckForQuestItem()
     {
-        foreach (ItemData x in Player.Instance.player._inventory)
+        foreach (ItemData item in Player.Instance.player._inventory)
         {
-            if (x._name.Equals("Beans"))
+            if (item._name.Equals("Beans"))
             {
                 _currentNode = _questCompleteNode;
             }
