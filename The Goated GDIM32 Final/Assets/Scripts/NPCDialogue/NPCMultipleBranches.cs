@@ -20,7 +20,7 @@ public class NPCMultipleBranches : MonoBehaviour
     [SerializeField] private GameObject _playerReply3;
     [SerializeField] private NPCDialogueUI _playerReplyUI;
 
-    [SerializeField] private float _npcDialogueDuration = 2f;
+    [SerializeField] private float _npcDialogueDuration = 1.5f;
     //UI Automatic Disapperance
 
 
@@ -39,17 +39,20 @@ public class NPCMultipleBranches : MonoBehaviour
 
         if(Vector3.Distance(transform.position, Player.Instance.transform.position) < _interactionDistance)
         {
-            _interactText.gameObject.SetActive(true);
+            if (!_runningDialogue)
+            {
+                _interactText.gameObject.SetActive(true);
+            }
 
-            if(!_waitingForPlayerResponse && Input.GetKeyDown(KeyCode.Mouse0))
+            if (!_waitingForPlayerResponse && Input.GetKeyDown(KeyCode.Mouse0))
             {
                 CheckForQuestItem();
                 AdvanceDialogue();
             }
-            else if(!_runningDialogue)
+            /*else if(!_runningDialogue)
             {
                 
-            }
+            }*/
         }
         else
         {
@@ -66,6 +69,12 @@ public class NPCMultipleBranches : MonoBehaviour
         {
             // if we still have NPC lines left, keep playing NPC lines
             ShowNPCDialogue();
+
+            if (_currentLine == _currentNode._lines.Length - 1)
+            {
+                CancelInvoke(nameof(HideNPCDialogue));
+                Invoke(nameof(HideNPCDialogue), _npcDialogueDuration);
+            }
 
             _currentLine++;
         }
@@ -86,6 +95,7 @@ public class NPCMultipleBranches : MonoBehaviour
 
     private void EndDialogue()
     {
+        
         _runningDialogue = false;
         _waitingForPlayerResponse = false;
         _currentNode = _startNode;
@@ -109,9 +119,6 @@ public class NPCMultipleBranches : MonoBehaviour
         _npcDialogue.GetComponent<TMP_Text>().text = _currentNode._lines[_currentLine].ToString();
         _npcDialogue.gameObject.SetActive(true);
 
-        CancelInvoke(nameof(HideNPCDialogue));
-        Invoke(nameof(HideNPCDialogue), _npcDialogueDuration);
-        //Hide UI
     }
 
     private void HideNPCDialogue()
