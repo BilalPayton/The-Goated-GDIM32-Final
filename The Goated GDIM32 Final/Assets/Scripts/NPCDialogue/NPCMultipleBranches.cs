@@ -20,6 +20,9 @@ public class NPCMultipleBranches : MonoBehaviour
     [SerializeField] private GameObject _playerReply3;
     [SerializeField] private NPCDialogueUI _playerReplyUI;
 
+    [SerializeField] private float _npcDialogueDuration = 2f;
+    //UI Automatic Disapperance
+
 
     private int _currentLine = 0;
     private bool _runningDialogue;
@@ -105,6 +108,10 @@ public class NPCMultipleBranches : MonoBehaviour
     {
         _npcDialogue.GetComponent<TMP_Text>().text = _currentNode._lines[_currentLine].ToString();
         _npcDialogue.gameObject.SetActive(true);
+
+        CancelInvoke(nameof(HideNPCDialogue));
+        Invoke(nameof(HideNPCDialogue), _npcDialogueDuration);
+        //Hide UI
     }
 
     private void HideNPCDialogue()
