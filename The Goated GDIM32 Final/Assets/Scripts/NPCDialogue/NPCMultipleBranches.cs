@@ -31,6 +31,11 @@ public class NPCMultipleBranches : MonoBehaviour
     private void Start()
     {
         _currentNode = _startNode;
+
+        if (_interactText != null)
+        {
+            _interactText.SetActive(true);
+        }
     }
 
     private void Update()
@@ -39,10 +44,11 @@ public class NPCMultipleBranches : MonoBehaviour
 
         if(Vector3.Distance(transform.position, Player.Instance.transform.position) < _interactionDistance)
         {
-            if (!_runningDialogue)
+            /*if (!_runningDialogue)
             {
                 _interactText.gameObject.SetActive(true);
-            }
+            }*/
+            //Make the Interact UI keep showing to let player know that there is a NPC
 
             if (!_waitingForPlayerResponse && Input.GetKeyDown(KeyCode.Mouse0))
             {
@@ -54,10 +60,10 @@ public class NPCMultipleBranches : MonoBehaviour
                 
             }*/
         }
-        else
+        /*else
         {
             EndDialogue();
-        }
+        }*/
     }
 
     private void AdvanceDialogue()
@@ -100,7 +106,7 @@ public class NPCMultipleBranches : MonoBehaviour
         _waitingForPlayerResponse = false;
         _currentNode = _startNode;
         _currentLine = 0;
-        _interactText.gameObject.SetActive(false);
+        //_interactText.gameObject.SetActive(false);
     }
 
     public void SelectedOption(int option)
