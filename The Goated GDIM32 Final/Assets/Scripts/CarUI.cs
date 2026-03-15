@@ -3,7 +3,7 @@
 public class CarUI : MonoBehaviour
 {
     public GameObject clickUI;
-    public float interactionDistance = 3f;
+    public float interactionDistance = 6f;
 
     private Transform player;
 
