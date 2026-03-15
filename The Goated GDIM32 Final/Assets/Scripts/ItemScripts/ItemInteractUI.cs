@@ -2,7 +2,7 @@
 
 public class ItemInteractUI : MonoBehaviour
 {
-    void LateUpdate()
+    private void LateUpdate()
     {
         transform.LookAt(Camera.main.transform);
         transform.Rotate(0, 180, 0);

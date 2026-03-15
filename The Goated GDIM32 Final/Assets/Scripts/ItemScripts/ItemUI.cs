@@ -8,7 +8,7 @@ public class ItemUI : MonoBehaviour
     //public float timer = 0f;
     //public float displayTime = 5f;
 
-    void Awake()
+    private void Awake()
     {
         panel.SetActive(false);
         text.text = "";
@@ -65,7 +65,7 @@ public class ItemUI : MonoBehaviour
             Invoke("Hide", 2f);
         }
     }*/
-    void HideUI()
+    private void HideUI()
     {
         panel.SetActive(false);
     }
