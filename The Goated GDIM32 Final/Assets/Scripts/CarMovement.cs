@@ -32,9 +32,12 @@ public class CarMovement : MonoBehaviour
         Player.Instance.enabled = false;
     }
 
-    void EndGame()
+    private void EndGame()
     {
         Debug.Log("Player Escaped!");
+
+        GameController.instance.GameVictory();
+
         Time.timeScale = 0f;
     }
 }

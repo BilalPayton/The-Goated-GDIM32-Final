@@ -35,10 +35,13 @@ public class JoeDialogue : NPCMultipleBranches
         {
             float distance = Vector3.Distance(transform.position, bean.transform.position);
 
-            if (distance < 4f)
+            if (distance < 3f)
             {
                 Destroy(bean);
                 _currentNode = _questCompleteNode;
+
+                GameController.instance.AdvanceState();
+
                 return;
             }
         }

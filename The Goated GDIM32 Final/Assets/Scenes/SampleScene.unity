@@ -9764,7 +9764,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 261568403265696318, guid: ff55be806d68d9149ad02d2e25d5bb61, type: 3}
       propertyPath: m_TagString
-      value: QuestItem
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 642492744181115012, guid: ff55be806d68d9149ad02d2e25d5bb61, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10950,7 +10950,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1181189027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11005,8 +11005,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -11064,8 +11064,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 28.846724, y: -30}
-  m_SizeDelta: {x: 500, y: 50}
+  m_AnchoredPosition: {x: 1, y: -0.10541}
+  m_SizeDelta: {x: 1102.9153, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1184768085
 PrefabInstance:
@@ -17325,7 +17325,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 261568403265696318, guid: ff55be806d68d9149ad02d2e25d5bb61, type: 3}
       propertyPath: m_TagString
-      value: QuestItem
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 642492744181115012, guid: ff55be806d68d9149ad02d2e25d5bb61, type: 3}
       propertyPath: m_LocalPosition.x

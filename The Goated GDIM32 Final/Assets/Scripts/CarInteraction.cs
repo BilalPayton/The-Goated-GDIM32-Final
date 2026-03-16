@@ -20,6 +20,11 @@ public class CarInteraction : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (GameController.instance.CurrentState != GameState.FindCar)
+        {
+            return;
+        }
+
         if (movement != null)
         {
             movement.StartEscape();

@@ -27,12 +27,12 @@ public class Item : MonoBehaviour
         {
             return;
         }
-            InventoryUI ui = FindObjectOfType<InventoryUI>();
+        InventoryUI ui = FindObjectOfType<InventoryUI>();
 
         if (ui != null && ui.inventory != null)
         {
-                ui.inventory.Add(_data);
-                ui.Refresh();
+            ui.inventory.Add(_data);
+            ui.Refresh();
 
             if (ui.itemUI != null)
             {
@@ -40,8 +40,16 @@ public class Item : MonoBehaviour
             }
         }
 
+        if (_data._name == "Beans")
+        {
+            GameController.instance.AdvanceState();
+        }
+
         Destroy(gameObject);
     }
+    
+    
+
 
     public virtual void Use(ItemUI ui)
     {

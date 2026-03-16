@@ -4,9 +4,10 @@ using System.Collections;
 //Laura
 public enum GameState
 {
-    Beans,
-    Escaping,
-    Victory
+    FindBeans,
+    GiveBeans,
+    FindCar,
+    Escaped
 }
 
 
@@ -31,7 +32,7 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-       CurrentState = GameState.Beans;
+        CurrentState = GameState.FindBeans;
     }
 
     private void Update()
@@ -41,8 +42,8 @@ public class GameController : MonoBehaviour
 
     private void HandleSpawning()
     {
- 
-        if (CurrentState == GameState.Escaping)
+
+        if (CurrentState == GameState.FindCar)
         {
             _spawnTimer += Time.deltaTime;
 
@@ -81,14 +82,29 @@ public class GameController : MonoBehaviour
 
     public void GameVictory()
     {
-        CurrentState = GameState.Victory;
+        CurrentState = GameState.Escaped;
 
         Time.timeScale = 0f;
     }
 
-    // public void ZombieDied()
-    //{
-    //   _currentZombieCount--;
-    // }
+    public void AdvanceState()
+    {
+        if (CurrentState == GameState.FindBeans)
+        {
+            CurrentState = GameState.GiveBeans;
+            Debug.Log("State → GiveBeans");
+        }
+        else if (CurrentState == GameState.GiveBeans)
+        {
+            CurrentState = GameState.FindCar;
+            Debug.Log("State → FindCar");
+        }
 
+
+        // public void ZombieDied()
+        //{
+        //   _currentZombieCount--;
+        // }
+
+    }
 }
