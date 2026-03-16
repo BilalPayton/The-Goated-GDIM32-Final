@@ -3748,13 +3748,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4078945312229555487, guid: 607ab23efbd2d424687833a5a9141d8d, type: 3}
+      propertyPath: _maxZombies
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4078945312229555487, guid: 607ab23efbd2d424687833a5a9141d8d, type: 3}
       propertyPath: _spawnPoints.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4078945312229555487, guid: 607ab23efbd2d424687833a5a9141d8d, type: 3}
       propertyPath: _spawnPoints.Array.data[0]
       value: 
-      objectReference: {fileID: 1446477702}
+      objectReference: {fileID: 0}
     - target: {fileID: 5056165684834364662, guid: 607ab23efbd2d424687833a5a9141d8d, type: 3}
       propertyPath: m_Name
       value: GameController
