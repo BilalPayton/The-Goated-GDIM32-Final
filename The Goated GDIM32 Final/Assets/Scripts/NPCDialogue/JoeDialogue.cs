@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class JoeDialogue : NPCMultipleBranches
 {
+    [SerializeField] private ItemData carKey;
     //private bool _beansGiven = false;
 
     /*public void GiveBeans()
@@ -35,15 +36,31 @@ public class JoeDialogue : NPCMultipleBranches
         {
             float distance = Vector3.Distance(transform.position, bean.transform.position);
 
-            if (distance < 3f)
+            if (distance < 4f)
             {
                 Destroy(bean);
                 _currentNode = _questCompleteNode;
 
                 GameController.instance.AdvanceState();
 
+                InventoryUI ui = FindObjectOfType<InventoryUI>();
+
+                if (ui != null && ui.inventory != null)
+                {
+                    ui.inventory.Add(carKey);
+                    ui.Refresh();
+
+                    if (ui.itemUI != null)
+                    {
+                        ui.itemUI.ShowCollected(carKey._name);
+                    }
+                }
+                    
                 return;
+
             }
+            
+            
         }
 
     }

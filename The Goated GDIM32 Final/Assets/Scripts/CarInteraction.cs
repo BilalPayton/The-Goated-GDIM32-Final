@@ -5,6 +5,8 @@ public class CarInteraction : MonoBehaviour
     private CarMovement movement;
     private CarUI carUI;
 
+    [SerializeField] private ItemData carKey;
+
     //public UnityEvent escape;
 
     private void Start()
@@ -20,23 +22,37 @@ public class CarInteraction : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (GameController.instance.CurrentState != GameState.FindCar)
+       
+        InventoryUI ui = FindObjectOfType<InventoryUI>();
+
+        if (ui == null || ui.inventory == null)
         {
             return;
         }
 
+        
+        if (!ui.inventory.Contains(carKey))
+        {
+            if (carUI != null)
+            {
+                carUI.ShowMessage("I need the car key.");
+            }
+            return;
+        }
+
+        
+        ui.inventory.Remove(carKey);
+        ui.Refresh();
+
         if (movement != null)
         {
             movement.StartEscape();
-
-            //escape?.Invoke();
         }
 
         if (carUI != null)
         {
             carUI.OnCarClicked();
         }
-
     }
 
 }
