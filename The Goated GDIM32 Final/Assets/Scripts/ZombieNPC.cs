@@ -16,15 +16,15 @@ public class ZombieNPC : MonoBehaviour
     [SerializeField] private float _wanderTimeMax = 5.0f;
     [SerializeField] private float _obstacleCheckDistance = 1.0f;
     [SerializeField] private float _obstactleCheckRadius = 1.0f;
-    [SerializeField] private float _stopDistance = 0.5f;
+    [SerializeField] private float _stopDistance = 1.2f;
     [SerializeField] private float _walkSpeed = 2f;
     [SerializeField] private float _rotateSpeed = 2f;
-    [SerializeField] private float _lineOfSightMaxDistance = 10f;
+    [SerializeField] private float _lineOfSightMaxDistance = 6f;
     [SerializeField] private Vector3 _raycastStartOffSet = new Vector3(0f, 1f, 0f);
     [SerializeField] private Rigidbody _rigidBody;
     [SerializeField] private MeshRenderer _renderer;
     [SerializeField] private float _interactDistance = 5.0f;
-    [SerializeField] private float _runDistance = 5.0f;
+    [SerializeField] private float _runDistance = 2.0f;
     [SerializeField] private NavMeshAgent _navAgent;
     [SerializeField] private Animator _animator;
 
@@ -45,6 +45,12 @@ public class ZombieNPC : MonoBehaviour
         if (_navAgent == null)
         {
             _navAgent = GetComponent<NavMeshAgent>();
+        }
+
+        if(_navAgent != null)
+        {
+            _navAgent.speed = _walkSpeed;
+            _navAgent.stoppingDistance = _stopDistance;
         }
 
         GameObject playerObj = GameObject.FindWithTag("Player");
@@ -74,7 +80,7 @@ public class ZombieNPC : MonoBehaviour
 
     private void UpdateState()
     {
-        if (HasLineOfSightToPlayer())
+        if (IsPlayerWithinRunDistance() && HasLineOfSightToPlayer())
         {
             _state = ZombieState.Chasing;
         }
@@ -104,23 +110,22 @@ public class ZombieNPC : MonoBehaviour
 
     private void RunWanderState()
     {
+      if(_navAgent == null)
+        {
+            return;
+        }
+
         _wanderTime -= Time.deltaTime;
 
-        if (_wanderTime <= 0.0f)
+        if(_wanderTime <= 0.0f || _navAgent.remainingDistance <= _stopDistance)
         {
             _wanderTime = _wanderTimeMax;
             GetNewWanderDirection();
-        }
 
-        int attempts = 0;
-        while (HasClosedObstacles() && attempts < 3)
-        {
-            GetNewWanderDirection();
-            attempts++;
+            Vector3 targetPosition = transform.position + (_wanderDirection * 3f);
+            _navAgent.isStopped = false;
+            _navAgent.SetDestination(targetPosition);
         }
-
-        RotateTowards(_wanderDirection);
-        transform.Translate(_wanderDirection * _walkSpeed * Time.deltaTime, Space.World);
     }
 
     private void GetNewWanderDirection()
@@ -157,39 +162,40 @@ public class ZombieNPC : MonoBehaviour
 
     private void RunChaseState()
     {
-        Vector3 playerPosition = _playerTransform.position;
-        playerPosition = new Vector3(playerPosition.x, 0, playerPosition.z);
-
-        Vector3 me = new Vector3(transform.position.x, 0, transform.position.z);
-        _meToPlayer = (playerPosition - me).normalized;
-
-        RotateTowards(_meToPlayer);
-        WalkTowards(playerPosition);
-    }
-
-    private void RotateTowards(Vector3 direction)
-    {
-        if (direction == Vector3.zero) return;
-
-        Vector3 currentForward = new Vector3(transform.forward.x, 0, transform.forward.z);
-        Vector3 newForward = Vector3.RotateTowards(currentForward, direction, _rotateSpeed * Time.deltaTime, 0f);
-        transform.forward = newForward;
-    }
-
-    private void WalkTowards(Vector3 point)
-    {
-        Vector3 me = new Vector3(transform.position.x, 0, transform.position.z);
-
-        if (Vector3.Distance(me, point) <= _stopDistance)
+       if(_navAgent == null || _playerTransform == null)
         {
             return;
         }
 
-        Vector3 meToTarget = point - me;
-        meToTarget = meToTarget.normalized;
-
-        transform.Translate(meToTarget * _walkSpeed * Time.deltaTime, Space.World);
+        _navAgent.isStopped = false;
+        _navAgent.speed = _walkSpeed;
+        _navAgent.SetDestination(_playerTransform.position);
     }
+
+    //private void RotateTowards(Vector3 direction)
+    //{
+        //if (direction == Vector3.zero) return;
+
+       // Vector3 currentForward = new Vector3(transform.forward.x, 0, transform.forward.z);
+       // Vector3 newForward = Vector3.RotateTowards(currentForward, direction, _rotateSpeed * Time.deltaTime, 0f);
+       // transform.forward = newForward;
+    //}
+    
+
+    //private void WalkTowards(Vector3 point)
+    //{
+       // Vector3 me = new Vector3(transform.position.x, 0, transform.position.z);
+
+       // if (Vector3.Distance(me, point) <= _stopDistance)
+       // {
+       //     return;
+       // }
+
+       // Vector3 meToTarget = point - me;
+       // meToTarget = meToTarget.normalized;
+
+       // transform.Translate(meToTarget * _walkSpeed * Time.deltaTime, Space.World);
+   // }
 
     private bool HasLineOfSightToPlayer()
     {
@@ -216,5 +222,14 @@ public class ZombieNPC : MonoBehaviour
         }
 
         return _hasLineOfSightToPlayer;
+    }
+
+    private bool IsPlayerWithinRunDistance()
+    {
+        if(_playerTransform == null)
+        {
+            return false;
+        }
+        return Vector3.Distance(transform.position, _playerTransform.position) <= _runDistance;
     }
 }
