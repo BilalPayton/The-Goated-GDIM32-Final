@@ -40,6 +40,11 @@ public class ZombieNPC : MonoBehaviour
     private Vector3 _raycastHitLocation;
     private Vector3 _spherecastHitLocation;
 
+    public delegate void playChaseMusic();
+    public delegate void stopChaseMusic();
+
+    public event playChaseMusic chaseMusicEvent;
+    public event stopChaseMusic stopChaseMusicEvent;
     void Start()
     {
         if (_navAgent == null)
@@ -90,10 +95,12 @@ public class ZombieNPC : MonoBehaviour
         if (IsPlayerWithinRunDistance() && HasLineOfSightToPlayer())
         {
             _state = ZombieState.Chasing;
+            chaseMusicEvent?.Invoke();
         }
         else
         {
             _state = ZombieState.Wandering;
+            stopChaseMusicEvent?.Invoke();
         }
     }
 
@@ -133,6 +140,8 @@ public class ZombieNPC : MonoBehaviour
             _navAgent.isStopped = false;
             _navAgent.SetDestination(targetPosition);
         }
+
+        
     }
 
     private void GetNewWanderDirection()
@@ -177,6 +186,7 @@ public class ZombieNPC : MonoBehaviour
         _navAgent.isStopped = false;
         _navAgent.speed = _walkSpeed;
         _navAgent.SetDestination(_playerTransform.position);
+        
     }
 
     //private void RotateTowards(Vector3 direction)
