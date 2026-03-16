@@ -4,6 +4,7 @@ public class CarUI : MonoBehaviour
 {
     public GameObject clickUI;
     public GameObject victoryUI;
+    public GameObject messageUI;
     public float interactionDistance = 2f;
 
     private Transform player;
@@ -24,6 +25,11 @@ public class CarUI : MonoBehaviour
             victoryUI.SetActive(false);
         }
 
+        if (messageUI != null)
+        {
+            messageUI.SetActive(false);
+        }
+
     }
 
     private void Update()
@@ -34,6 +40,11 @@ public class CarUI : MonoBehaviour
         }
 
         float distance = Vector3.Distance(player.position, transform.position);
+
+        if (messageUI != null && messageUI.activeSelf)
+        {
+            return;
+        }
 
         if (clickUI != null)
         {
@@ -58,5 +69,32 @@ public class CarUI : MonoBehaviour
         }
 
         GameController.instance.GameVictory();
+    }
+
+    public void ShowMessage(string message)
+    {
+        Debug.Log("ShowMessage called");
+
+
+        if (messageUI != null)
+        {
+            messageUI.SetActive(true);
+        }
+
+        if (clickUI != null)
+        {
+            clickUI.SetActive(false);
+        }
+
+        Debug.Log(message);
+        Invoke(nameof(HideMessage), 3f);
+    }
+
+    private void HideMessage()
+    {
+        if (messageUI != null)
+        {
+            messageUI.SetActive(false);
+        }
     }
 }

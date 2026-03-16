@@ -19,6 +19,11 @@ public class Inventory : ScriptableObject
         items.Remove(item);
     }
 
+    public bool Contains(ItemData item)
+    {
+        return items.Contains(item);
+    }
+
     private void OnEnable()
     {
         if (items == null)
