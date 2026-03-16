@@ -49,6 +49,14 @@ public class Player : MonoBehaviour
 
     [SerializeField] float sensitivity = 150f;
 
+    [SerializeField] Vector3 _playerCenter;
+
+    private float _moveX;
+
+    private float _moveZ;
+
+    private float _moveY;
+
     
 
 
@@ -59,11 +67,21 @@ public class Player : MonoBehaviour
 
     //public List<ItemData> _inventory;
 
+    public Vector3 PlayerCenter
+    {
+        get
+        {
+            return transform.TransformPoint(_playerCenter);
+        }
+    }
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
 
         _speed = _walkSpeed;
+
+        _rb.freezeRotation = true;
     }
 
 
@@ -72,7 +90,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-          if(Input.GetKey(KeyCode.LeftShift))
+         if (Input.GetKey(KeyCode.LeftShift))
         {
             _speed = _sprintSpeed;
         }
@@ -80,44 +98,39 @@ public class Player : MonoBehaviour
         {
             _speed = _walkSpeed;
         }
-        if(Input.GetKey(KeyCode.W))
-        {
-            transform.Translate(Vector3.forward * _speed * Time.deltaTime);
-        }
-        if(Input.GetKey(KeyCode.D))
-        {
-            transform.Translate(Vector3.right * _speed * Time.deltaTime);
-        }
-        if(Input.GetKey(KeyCode.A))
-        {
-            transform.Translate(Vector3.left * _speed * Time.deltaTime);
-        }
-        if(Input.GetKey(KeyCode.S))
-        {
-            transform.Translate(Vector3.back * _speed * Time.deltaTime);
-        }
+
+         
+        _moveX = Input.GetAxisRaw("Horizontal");
+        _moveZ = Input.GetAxisRaw("Vertical");
+
+
+        
+
         if(Input.GetKeyDown(KeyCode.Space) && _isGrounded)
         {
             _rb.velocity = new Vector3 (_rb.velocity.x, _jumpVelocity, _rb.velocity.z);
         }
-      
-        
-        
+
+        float mouseX = Input.GetAxis("Mouse X") * sensitivity;
+        float mouseY = Input.GetAxis("Mouse Y") * sensitivity;
 
         
-        
+        transform.Rotate(Vector3.up * mouseX);
 
-    float mouseX = Input.GetAxis("Mouse X") * sensitivity;
-    float mouseY = Input.GetAxis("Mouse Y") * sensitivity;
-
-   transform.Rotate(Vector3.up * mouseX);
-
-   xRotation += mouseY;
-   xRotation = Mathf.Clamp(xRotation, -80f, 80f);
-   cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+        xRotation += mouseY;
+        xRotation = Mathf.Clamp(xRotation, -80f, 80f);
+        cameraTransform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
 
 
+    }
+
+    void FixedUpdate()
+    {
+        Vector3 moveDirection = transform.forward * _moveZ + transform.right * _moveX;
+        moveDirection = moveDirection.normalized * _speed;
+
+        _rb.velocity = new Vector3(moveDirection.x, _rb.velocity.y, moveDirection.z);
     }
 
     void OnCollisionEnter(Collision collision)
