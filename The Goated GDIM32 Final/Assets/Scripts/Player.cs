@@ -65,7 +65,7 @@ public class Player : MonoBehaviour
     float yRotation;
 
 
-    //public List<ItemData> _inventory;
+    
 
     public Vector3 PlayerCenter
     {

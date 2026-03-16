@@ -25,4 +25,5 @@ MonoBehaviour:
   - Stay safe friend
   _playerReplyOptions:
   - Thanks Joe!
-  _npcReplies: []
+  _npcReplies:
+  - {fileID: 11400000, guid: b5cae34df11445a41a05858ba68fbdf9, type: 2}
