@@ -4,8 +4,9 @@ using System.Collections;
 //Laura
 public enum GameState
 {
-    Quest1,
-    Escaping
+    Beans,
+    Escaping,
+    Victory
 }
 
 
@@ -30,7 +31,7 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-       CurrentState = GameState.Quest1;
+       CurrentState = GameState.Beans;
     }
 
     private void Update()
@@ -76,6 +77,13 @@ public class GameController : MonoBehaviour
         Player.Instance.player._inventory.Remove(item);
 
         FindObjectOfType<InventoryUI>().Refresh();
+    }
+
+    public void GameVictory()
+    {
+        CurrentState = GameState.Victory;
+
+        Time.timeScale = 0f;
     }
 
     // public void ZombieDied()
