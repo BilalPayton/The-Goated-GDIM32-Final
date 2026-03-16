@@ -7,6 +7,8 @@ public class Item : MonoBehaviour
 
     [SerializeField] private ItemData _data;
 
+    private bool pickupAllowed = true;
+
     protected void OnMouseOver()
     {
         Debug.Log("You are hovering over the Item");
@@ -19,9 +21,13 @@ public class Item : MonoBehaviour
 
     protected virtual void OnMouseDown()
     {
-        Player.Instance.player._inventory.Add(_data);
+        //Player.Instance.player._inventory.Add(_data);
 
-        InventoryUI ui = FindObjectOfType<InventoryUI>();
+        if (!pickupAllowed)
+        {
+            return;
+        }
+            InventoryUI ui = FindObjectOfType<InventoryUI>();
 
         if (ui != null && ui.inventory != null)
         {
@@ -36,12 +42,18 @@ public class Item : MonoBehaviour
 
         Destroy(gameObject);
     }
+
     public virtual void Use(ItemUI ui)
     {
         if (ui != null)
         {
             ui.ShowMessage("You used " + _data._name);
         }
+    }
+
+    public virtual void SetPickup (bool value)
+    {
+        pickupAllowed = value;
     }
 }
 

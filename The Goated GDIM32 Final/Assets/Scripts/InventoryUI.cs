@@ -11,7 +11,7 @@ public class InventoryUI : MonoBehaviour
     public int selectedIndex = 0;
     public ItemUI itemUI;
 
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1)) SelectSlot(0);
         if (Input.GetKeyDown(KeyCode.Alpha2)) SelectSlot(1);
@@ -33,15 +33,15 @@ public class InventoryUI : MonoBehaviour
         }
 
     }
-    void Awake()
+    private void Awake()
     {
         inventory.ResetInventory();
     }
-    void Start()
+    private void Start()
     {
         Refresh();
     }
-    void SelectSlot(int index)
+    private void SelectSlot(int index)
     {
         selectedIndex = index;
 
@@ -52,7 +52,8 @@ public class InventoryUI : MonoBehaviour
             itemUI.ShowItem(inventory.items[index]._name);
         }
     }
-    void UseItem()
+
+    private void UseItem()
     {
         ItemData item = inventory.items[selectedIndex];
 
@@ -65,21 +66,24 @@ public class InventoryUI : MonoBehaviour
 
         inventory.Remove(item);
         Refresh();
-
-        
+ 
     }
-    void DropItem()
+
+    private void DropItem()
     {
         if (selectedIndex >= inventory.items.Count) return;
 
         ItemData item = inventory.items[selectedIndex];
 
-        GameObject obj = Instantiate(item.prefab);
+        GameObject obj = Instantiate(item.worldPrefab);
+
+        obj.transform.localScale = Vector3.one;
+
 
         Vector3 forward = player.transform.forward;
         forward.y = 0;
 
-        Vector3 dropPosition = player.transform.position + forward * 0.7f;
+        Vector3 dropPosition = player.transform.position + forward * 1.5f;
 
         RaycastHit hit;
 
@@ -96,10 +100,18 @@ public class InventoryUI : MonoBehaviour
 
         Refresh();
 
+        Item itemScript = obj.GetComponent<Item>();
+        if (itemScript != null)
+        {
+            itemScript.SetPickup(false);
+        }
+
         if (itemUI != null)
         {
             itemUI.ShowMessage(item._name + " dropped.");
         }
+
+        
     }
 
     public void Refresh()

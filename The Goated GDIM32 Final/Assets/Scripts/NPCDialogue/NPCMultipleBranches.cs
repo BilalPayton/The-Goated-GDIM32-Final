@@ -106,6 +106,8 @@ public class NPCMultipleBranches : MonoBehaviour
         _waitingForPlayerResponse = false;
         _currentNode = _startNode;
         _currentLine = 0;
+
+        _interactText.SetActive(true);
         //_interactText.gameObject.SetActive(false);
     }
 

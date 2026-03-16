@@ -32,7 +32,7 @@ public class ItemUI : MonoBehaviour
         text.text = message;
 
         CancelInvoke();
-        Invoke("HideUI", 2f);
+        Invoke("HideUI", 1.5f);
     }
 
     /*void Update()
