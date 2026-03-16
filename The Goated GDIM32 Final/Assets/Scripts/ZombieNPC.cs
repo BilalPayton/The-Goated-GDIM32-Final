@@ -65,6 +65,12 @@ public class ZombieNPC : MonoBehaviour
 
         _wanderTime = _wanderTimeMax;
         GetNewWanderDirection();
+
+
+        if(_animator == null)
+        {
+            _animator = GetComponent<Animator>();
+        }
     }
 
     void Update()
@@ -76,6 +82,7 @@ public class ZombieNPC : MonoBehaviour
 
         UpdateState();
         RunState();
+        UpdateAnimation();
     }
 
     private void UpdateState()
@@ -231,5 +238,16 @@ public class ZombieNPC : MonoBehaviour
             return false;
         }
         return Vector3.Distance(transform.position, _playerTransform.position) <= _runDistance;
+    }
+
+    private void UpdateAnimation()
+    {
+        if(_animator == null || _navAgent == null)
+        {
+            return;
+        }
+
+        bool isMoving = _navAgent.velocity.magnitude > 0.1f;
+        _animator.SetBool("IsMoving", isMoving);
     }
 }
