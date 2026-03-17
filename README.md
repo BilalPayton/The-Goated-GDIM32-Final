@@ -77,3 +77,5 @@ I also made some changes to the hint system for certain items, like adding light
 ## Open-Source Assets
 Cite any open-source assets here. Put them in a LIST, and use correctly formatted LINKS.
 - Carkeys Picture: https://www.shutterstock.com/zh/image-vector/car-keys-flat-illustration-isolated-on-2474685427?trackingId=0bf16d0e-d7f6-46ff-97fb-705dd6f38cea&listId=searchResults
+
+- Building materials, zombie models, and tree models: https://kenney.nl/assets/page:4
