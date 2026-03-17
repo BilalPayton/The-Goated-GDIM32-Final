@@ -400,7 +400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  driveTime: 15
+  driveTime: 5
 --- !u!4 &35721481
 Transform:
   m_ObjectHideFlags: 0
@@ -24318,7 +24318,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1266802081416570960, guid: 179becd3b0a14454ea42abb20df041f0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.865471
+      value: -3.62
       objectReference: {fileID: 0}
     - target: {fileID: 1266802081416570960, guid: 179becd3b0a14454ea42abb20df041f0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -24326,7 +24326,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1266802081416570960, guid: 179becd3b0a14454ea42abb20df041f0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -25.59031
+      value: -25.75
       objectReference: {fileID: 0}
     - target: {fileID: 1266802081416570960, guid: 179becd3b0a14454ea42abb20df041f0, type: 3}
       propertyPath: m_LocalRotation.w
