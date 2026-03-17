@@ -12,8 +12,12 @@ public class GameAudio : MonoBehaviour
 
     private void Awake()
     {
-        _zombie.chaseMusicEvent += InitiateChase;
-        _zombie.stopChaseMusicEvent += StopChase;
+        if(_zombie != null)
+        {
+            _zombie.chaseMusicEvent += InitiateChase;
+            _zombie.stopChaseMusicEvent += StopChase;
+        }
+        
     }
 
     private void Start()

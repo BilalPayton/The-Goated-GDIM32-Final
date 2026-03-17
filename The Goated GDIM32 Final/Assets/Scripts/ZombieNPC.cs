@@ -34,6 +34,12 @@ public class ZombieNPC : MonoBehaviour
 
     private float _lastDamageTime;
 
+    public System.Action chaseMusicEvent;
+
+    public System.Action stopChaseMusicEvent;
+
+    private bool _wasChasingLastFrame = false;
+
     
 
 
@@ -93,6 +99,17 @@ public class ZombieNPC : MonoBehaviour
         UpdateState();
         RunState();
         UpdateAnimation();
+
+        if(_state == ZombieState.Chasing && !_wasChasingLastFrame)
+        {
+            chaseMusicEvent?.Invoke();
+            _wasChasingLastFrame = true;
+        }
+        else if (_state == ZombieState.Wandering && _wasChasingLastFrame)
+        {
+            stopChaseMusicEvent?.Invoke();
+            _wasChasingLastFrame = false;
+        }
     }
 
     private void UpdateState()
