@@ -9,19 +9,9 @@ public class Item : MonoBehaviour
 
     private bool pickupAllowed = true;
 
-    protected void OnMouseOver()
-    {
-        Debug.Log("You are hovering over the Item");
-    }
-
-    protected void OnMouseExit()
-    {
-        Debug.Log("You are no longer hovering over the Item");
-    }
-
     protected virtual void OnMouseDown()
     {
-        //Player.Instance.player._inventory.Add(_data);
+        Player.Instance.player._inventory.Add(_data);
 
         if (!pickupAllowed)
         {
