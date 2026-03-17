@@ -41,6 +41,8 @@ public class JoeDialogue : NPCMultipleBranches
                 Destroy(bean);
                 _currentNode = _questCompleteNode;
 
+                _currentLine = 0;
+
                 GameController.instance.AdvanceState();
 
                 InventoryUI ui = FindObjectOfType<InventoryUI>();

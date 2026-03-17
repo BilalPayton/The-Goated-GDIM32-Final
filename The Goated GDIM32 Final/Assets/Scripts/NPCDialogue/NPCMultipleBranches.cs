@@ -24,7 +24,7 @@ public class NPCMultipleBranches : MonoBehaviour
     //UI Automatic Disapperance
 
 
-    private int _currentLine = 0;
+    protected int _currentLine = 0;
     private bool _runningDialogue;
     private bool _waitingForPlayerResponse;
 
@@ -52,6 +52,11 @@ public class NPCMultipleBranches : MonoBehaviour
 
             if (!_waitingForPlayerResponse && Input.GetKeyDown(KeyCode.Mouse0))
             {
+                if (!_runningDialogue)
+                {
+                    _currentLine = 0;
+                }
+
                 CheckForQuestItem();
                 AdvanceDialogue();
             }
@@ -106,6 +111,9 @@ public class NPCMultipleBranches : MonoBehaviour
         _waitingForPlayerResponse = false;
         _currentNode = _startNode;
         _currentLine = 0;
+
+        CancelInvoke(nameof(HideNPCDialogue));
+        HideNPCDialogue();
 
         _interactText.SetActive(true);
         //_interactText.gameObject.SetActive(false);
