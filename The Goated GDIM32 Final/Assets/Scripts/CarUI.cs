@@ -58,7 +58,7 @@ public class CarUI : MonoBehaviour
 
         clickUI.SetActive(false);
 
-        Invoke(nameof(ShowVictory), 3f);
+        Invoke(nameof(ShowVictory), 2f);
     }
 
     private void ShowVictory()

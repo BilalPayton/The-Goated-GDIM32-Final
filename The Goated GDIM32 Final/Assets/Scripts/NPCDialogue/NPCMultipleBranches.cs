@@ -54,9 +54,18 @@ public class NPCMultipleBranches : MonoBehaviour
             {
                 if (!_runningDialogue)
                 {
+                    
+                    if (GameController.instance.CurrentState == GameState.FindCar)
+                    {
+                        _currentNode = _questCompleteNode;
+                    }
+                    else
+                    {
+                        _currentNode = _startNode;
+                    }
+
                     _currentLine = 0;
                 }
-
                 CheckForQuestItem();
                 AdvanceDialogue();
             }
@@ -109,7 +118,7 @@ public class NPCMultipleBranches : MonoBehaviour
         
         _runningDialogue = false;
         _waitingForPlayerResponse = false;
-        _currentNode = _startNode;
+        //_currentNode = _startNode;
         _currentLine = 0;
 
         CancelInvoke(nameof(HideNPCDialogue));

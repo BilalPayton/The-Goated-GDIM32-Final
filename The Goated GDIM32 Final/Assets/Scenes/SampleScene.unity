@@ -400,7 +400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  driveTime: 5
+  driveTime: 2
 --- !u!4 &35721481
 Transform:
   m_ObjectHideFlags: 0
@@ -5634,6 +5634,10 @@ PrefabInstance:
     - target: {fileID: 587657841897222064, guid: a82a3cb97e7a7ec41aa4f1934fb3651d, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1125939992647460917, guid: a82a3cb97e7a7ec41aa4f1934fb3651d, type: 3}
+      propertyPath: m_text
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1148585378116073666, guid: a82a3cb97e7a7ec41aa4f1934fb3651d, type: 3}
       propertyPath: m_Enabled

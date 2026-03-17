@@ -22,8 +22,15 @@ public class ItemUI : MonoBehaviour
     public void ShowItem(string itemName)
     {
         panel.SetActive(true);
-        text.text = itemName + "\nPress E to Eat\nPress Q to Drop";
-
+        //text.text = itemName + "\nPress E to Eat\nPress Q to Drop";
+        if (itemName == "Carkey")
+        {
+            text.text = itemName + "\nFind the car to use it!";
+        }
+        else
+        {
+            text.text = itemName + "\nPress E to Eat\nPress Q to Drop";
+        }
         //timer = displayTime;
     }
     public void ShowMessage(string message)

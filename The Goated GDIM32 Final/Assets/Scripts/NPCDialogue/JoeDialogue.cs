@@ -5,6 +5,7 @@ using UnityEngine;
 public class JoeDialogue : NPCMultipleBranches
 {
     [SerializeField] private ItemData carKey;
+    private bool _hasGivenKey = false;
     //private bool _beansGiven = false;
 
     /*public void GiveBeans()
@@ -29,6 +30,10 @@ public class JoeDialogue : NPCMultipleBranches
             }
         }*/
         //Change the giving beans logic to drop the beans then have the next quest
+        if (_hasGivenKey)
+        {
+            return;
+        }
 
         GameObject[] beans = GameObject.FindGameObjectsWithTag("QuestItem");
 
@@ -39,6 +44,7 @@ public class JoeDialogue : NPCMultipleBranches
             if (distance < 4f)
             {
                 Destroy(bean);
+                _hasGivenKey = true;
                 _currentNode = _questCompleteNode;
 
                 _currentLine = 0;
