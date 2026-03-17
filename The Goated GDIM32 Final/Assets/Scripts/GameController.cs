@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.AI;
 
 //Laura
 public enum GameState
@@ -43,7 +44,10 @@ public class GameController : MonoBehaviour
     private void HandleSpawning()
     {
 
-        if (CurrentState == GameState.FindCar)
+        if (CurrentState == GameState.Escaped)
+        {
+            return;
+        }
         {
             _spawnTimer += Time.deltaTime;
 
@@ -66,9 +70,16 @@ public class GameController : MonoBehaviour
         int index = Random.Range(0, _spawnPoints.Length);
         Transform spawnPoint = _spawnPoints[index];
 
-        Instantiate(_zombiePrefab, spawnPoint.position, Quaternion.identity);
-
-        _currentZombieCount++;
+        NavMeshHit hit;
+        if(NavMesh.SamplePosition(spawnPoint.position, out hit, 2f, NavMesh.AllAreas))
+        {
+            Instantiate(_zombiePrefab, hit.position, spawnPoint.rotation);
+            _currentZombieCount++;
+        }
+        else
+        {
+            Debug.LogWarning("No NavMesh found near spawn point:" + spawnPoint.name);
+        }
     }
 
     public void GiveItem(ItemData item)
